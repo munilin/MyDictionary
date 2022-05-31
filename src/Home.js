@@ -32,14 +32,14 @@ const Home = (props) => {
                         >
                            <p>단어</p> {list.word}
                            <p>예시</p> {list.explan}
-                           <p>설명</p> {list.example}
+                           <p>설명</p> <Blue>{list.example}</Blue>
                         </Card>
                     );
                 })}
             </Word>
 
-            <button onClick={() =>
-                history.push("/add")}>+</button>
+            <Button onClick={() =>
+                history.push("/add")}>+</Button>
         </>
     )
 }
@@ -63,5 +63,19 @@ padding-top: 0px;
     text-decoration: underline;
 }
 `
+const Blue = styled.div`
+color: blue
+`
 
+const Button = styled.div`
+background : blue;
+color: white;
+text-align: center;
+width: 80px;
+height: 80px;
+border-radius: 100px;
+margin : auto;
+padding-top: 1px;
+font-size: 50px;
+`
 export default Home;

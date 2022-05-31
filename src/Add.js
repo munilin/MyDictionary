@@ -6,28 +6,39 @@ import { useDispatch } from "react-redux";
 // useDispatch는 데이터를 업데이트할 때,
 // useSelector는 데이터를 가져올 때 씁니다.
 
-import { createAdd } from "./redux/modules/add";
+import { 
+    // createAdd,
+     addAddFB } from "./redux/modules/add";
+
 
 
 
 const Add = (props) => {
 
-    const word = React.useRef(null);
-    const explan = React.useRef(null);
-    const example = React.useRef(null);
-
     const dispatch = useDispatch();
     let history = useHistory();
 
-  
-    const addAddList = () => {
+    const word = React.useRef(null);
+    const explain = React.useRef(null);
+    const example = React.useRef(null);
 
-      dispatch(createAdd(word.current.value));
-      dispatch(createAdd(explan.current.value));
-      dispatch(createAdd(example.current.value));
+    const addAddList = () => {
+    //리덕스
+    //   dispatch(createAdd(word.current.value));
+    //   dispatch(createAdd(explan.current.value));
+    //   dispatch(createAdd(example.current.value));
+
+      dispatch(addAddFB({ 
+        word: word.current.value,
+        explan: explain.current.value,
+        example: example.current.value
+    }));
 
       console.log(addAddList)
+      
     };
+
+
 
     return (
         <>
@@ -41,7 +52,7 @@ const Add = (props) => {
         <Card>
             <Word>
             <p>설명</p>
-            <input type="text" ref={explan}></input>
+            <input type="text" ref={explain}></input>
             </Word>
         </Card>
         <Card>
@@ -51,10 +62,10 @@ const Add = (props) => {
             </Word>
         </Card>
         
-        <button onClick={() => {
-            history.push("/");
+        <Button onClick={() => {
             dispatch(addAddList);
-        }}>추가하기</button>
+            history.push("/");
+        }}>추가하기</Button>
         </>
 
     )
@@ -80,4 +91,15 @@ padding-top: 0px;
     text-decoration: underline;
 }
 `
+
+const Button = styled.div`
+background : blue;
+color: white;
+text-align: center;
+width: 230px;
+height: 35px;
+margin : auto;
+padding-top: 10px;
+`
+
 export default Add;

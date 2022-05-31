@@ -1,6 +1,6 @@
 // add.js
 import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 // Actions
 const LOAD = 'add/LOAD';
@@ -35,6 +35,19 @@ export const loadAddFB = () => {
         dispatch(loadAdd(add_list));
     };
 };
+
+// 파이어베이스랑 통신하는 부분   =   추가하기
+export const addAddFB = (add) => {
+    return async function (dispatch) {
+          // 파이어스토어에 추가하기를 기다려요!
+      const docRef = await addDoc(collection(db, "mydictionary"), add);
+          // 추가한 데이터 중 id를 가져와서 add_data를 만들어줬어요!
+      const add_data = { id: docRef.id, ...add };
+          // 그럼 이제 액션을 일으키자! (수정해달라고 요청하자!)
+      dispatch(createAdd(add_data));
+    }
+  }
+
 
 // Reducer
 export default function reducer(state = initialState, action = {}) {

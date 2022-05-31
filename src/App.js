@@ -7,21 +7,21 @@ import Add from './Add';
 
 function App() {
 
-//firestore추가
-//   React.useEffect(async() => {
-// const docRef = await addDoc(collection(db, 'mydictionary'), {
-//      completed: false,
-//      text: "new"
-//    })
-//   }, []);
+  //firestore추가
+  //   React.useEffect(async() => {
+  // const docRef = await addDoc(collection(db, 'mydictionary'), {
+  //      completed: false,
+  //      text: "new"
+  //    })
+  //   }, []);
 
 
   return (
     <div className="App">
       <Switch>
         <Container>
-          <Route path='/' exact component={Home}/>
-          <Route path='/add' component={Add}/>
+          <Route path='/' exact component={Home} />
+          <Route path='/add' component={Add} />
         </Container>
       </Switch>
     </div>
