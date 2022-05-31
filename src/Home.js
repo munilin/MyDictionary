@@ -1,54 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-
 // useDispatch는 데이터를 업데이트할 때,
 // useSelector는 데이터를 가져올 때 씁니다.
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { loadAddFB } from "./redux/modules/add"
 
 const Home = (props) => {
+   
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    let history = useHistory();
-    //   console.log(props);
-    //   const my_lists = props.list;
-    // 여기에서 state는 리덕스 스토어가 가진 전체 데이터예요.
-    // 우리는 그 중, bucket 안에 들어있는 list를 가져옵니다.
-    const my_words = useSelector((state) => state.add.word);
-    const my_explans = useSelector((state) => state.add.explan);
-    const my_examples = useSelector((state) => state.add.example);
+    React.useEffect(() => {
+        dispatch(loadAddFB());
+      }, [dispatch]);
 
-    console.log(my_words)
-
+    const add_list = useSelector((state) => state.add.list);
 
     return (
         <>
             <Title>MY DICTIONARY</Title>
-            <Card>
-                <Word>
-                    <p>단어</p>
-                    <div>{my_words}
-                    </div>
-                    <p>설명</p>
-                    <div>{my_explans}
-                    </div>
-                    <p>예시</p>
-                    <div style={{ color: "blue" }}>
-                        {my_examples}
-                    </div>
-                </Word>
-                <button onClick={() =>
-                    history.push("/add")}>추가하기</button>
+            <Word>
+                {
+                add_list.map((list, index) => {
+                    return (
+                        <Card
+                            key={index}
+                            onClick={() => {
+                                history.push("/detail"+index);
+                            }}
+                        >
+                           <p>단어</p> {list.word}
+                           <p>예시</p> {list.explan}
+                           <p>설명</p> {list.example}
+                        </Card>
+                    );
+                })}
+            </Word>
 
-            </Card>
-
-
+            <button onClick={() =>
+                history.push("/add")}>+</button>
         </>
     )
 }
 const Title = styled.h5`
 text-align: left;
 margin-top: 5px; 
-`;
+`
 const Card = styled.div`
 max-width: 250px;
 max-height: 15vh;

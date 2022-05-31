@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import { Route, Switch, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { createAdd } from "./redux/modules/add";
-import { db } from "./firebase";
-import { collection, doc, getDoc, getDocs, addDoc } from "firebase/firestore";
+import { Route, Switch } from "react-router-dom";
 
 import Home from './Home';
 import Add from './Add';
 
 function App() {
 
-  //firestore추가
+//firestore추가
 //   React.useEffect(async() => {
 // const docRef = await addDoc(collection(db, 'mydictionary'), {
 //      completed: false,
@@ -24,12 +20,8 @@ function App() {
     <div className="App">
       <Switch>
         <Container>
-          <Route path='/' exact>
-            <Home />
-          </Route>
-          <Route path='/add' exact>
-            <Add />
-          </Route>
+          <Route path='/' exact component={Home}/>
+          <Route path='/add' component={Add}/>
         </Container>
       </Switch>
     </div>
