@@ -1,6 +1,6 @@
 // add.js
 import { db } from "../../firebase";
-import { collection, doc, getDoc, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 // Actions
 const LOAD = 'add/LOAD';
@@ -23,7 +23,7 @@ export const loadAddFB = () => {
     return async function (dispatch) {
         //비동기 통신이여서 async 붙이기
         const add_data = await getDocs(collection(db, "mydictionary"));
-        // firebase에서 받아 올때까지 기다려주고          db에서 "만든 폴더"
+        // firebase에서 받아 올때까지 기다려주고         db에서 "만든 폴더"
         let add_list = [];
         //받은 정보 넣어줄 배열 만들어주고
         add_data.forEach((b) => {
