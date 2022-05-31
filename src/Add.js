@@ -2,29 +2,43 @@ import React from "react";
 import styled from "styled-components";
 
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // useDispatch는 데이터를 업데이트할 때,
 // useSelector는 데이터를 가져올 때 씁니다.
 
-import { createAdd } from "./redux/modules/add";
+import { 
+    // createAdd,
+     addAddFB } from "./redux/modules/add";
+
 
 
 
 const Add = (props) => {
 
-    const text = React.useRef(null);
     const dispatch = useDispatch();
     let history = useHistory();
 
-  
+    const word = React.useRef(null);
+    const explain = React.useRef(null);
+    const example = React.useRef(null);
+
     const addAddList = () => {
-      // 스프레드 문법! 기억하고 계신가요? :)
-      // 원본 배열 list에 새로운 요소를 추가해주었습니다.
-      // 여긴 이제 주석처리!
-      // setList([...list, text.current.value]);
-  
-      dispatch(createAdd(text.current.value));
+    //리덕스
+    //   dispatch(createAdd(word.current.value));
+    //   dispatch(createAdd(explan.current.value));
+    //   dispatch(createAdd(example.current.value));
+
+      dispatch(addAddFB({ 
+        word: word.current.value,
+        explan: explain.current.value,
+        example: example.current.value
+    }));
+
+      console.log(addAddList)
+      
     };
+
+
 
     return (
         <>
@@ -32,26 +46,26 @@ const Add = (props) => {
         <Card>
             <Word>
             <p>단어</p>
-            <input type="text" ref={text}></input>
+            <input type="text" ref={word}></input>
             </Word>
         </Card>
         <Card>
             <Word>
             <p>설명</p>
-            <input type="text" ref={text}></input>
+            <input type="text" ref={explain}></input>
             </Word>
         </Card>
         <Card>
             <Word>
             <p>예시</p>
-            <input type="text" ref={text}></input>
+            <input type="text" ref={example}></input>
             </Word>
         </Card>
         
-        <button onClick={() => {
+        <Button onClick={() => {
             dispatch(addAddList);
             history.push("/");
-        }}>추가하기</button>
+        }}>추가하기</Button>
         </>
 
     )
@@ -77,4 +91,15 @@ padding-top: 0px;
     text-decoration: underline;
 }
 `
+
+const Button = styled.div`
+background : blue;
+color: white;
+text-align: center;
+width: 230px;
+height: 35px;
+margin : auto;
+padding-top: 10px;
+`
+
 export default Add;
