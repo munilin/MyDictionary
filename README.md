@@ -1,5 +1,8 @@
 ## My Dictionary Come on man~
 
+완성본 푸시 오류로 Muni - Pull requests에 있습니다
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
